@@ -417,6 +417,11 @@ function (cotire_get_target_compile_flags _config _language _target _flagsVar)
 	if (CMAKE_${_language}_FLAGS_${_upperConfig})
 		set (_compileFlags "${_compileFlags} ${CMAKE_${_language}_FLAGS_${_upperConfig}}")
 	endif()
+	# directory compile options
+	get_directory_property(_dirCompileOptions COMPILE_OPTIONS)
+	if (_dirCompileOptions)
+		list (APPEND _compileFlags ${_dirCompileOptions})
+	endif()
 	if (_target)
 		# add target compile flags
 		get_target_property(_targetflags ${_target} COMPILE_FLAGS)
